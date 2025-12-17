@@ -1,0 +1,41 @@
+{
+  "rows": 4,
+  "columns": [
+    "name",
+    "age",
+    "city",
+    "salary"
+  ],
+  "missing": {
+    "name": 0,
+    "age": 1,
+    "city": 1,
+    "salary": 1
+  },
+  "stats": {
+    "name": {
+      "type": "str",
+      "unique": 4,
+      "min": null,
+      "max": null
+    },
+    "age": {
+      "type": "int",
+      "unique": 3,
+      "min": 23,
+      "max": 31
+    },
+    "city": {
+      "type": "str",
+      "unique": 3,
+      "min": null,
+      "max": null
+    },
+    "salary": {
+      "type": "int",
+      "unique": 3,
+      "min": 9000,
+      "max": 15000
+    }
+  }
+}

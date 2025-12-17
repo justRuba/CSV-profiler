@@ -13,14 +13,11 @@ st.caption("Upload CSV → Profile → Export")
 
 uploaded = st.sidebar.file_uploader("Upload CSV", type=["csv"])
 
-if not uploaded:
-    return 
-
 if uploaded:
     text = uploaded.getvalue().decode("utf-8") 
     rows = list(csv.DictReader(StringIO(text)))
 
-if st.button("Generate Profile"):
+if st.button("Generate Profile") and uploaded:
     profile = basic_profile(rows)
     st.session_state["profile"] = profile
 
@@ -32,6 +29,19 @@ if "profile" in st.session_state:
 
     st.subheader("Missing Values")
     st.table(profile["missing"])
+
+    if "stats" in profile:
+        st.subheader("Column Statistics")
+        stats_data = []
+        for col, stats in profile["stats"].items():
+            stats_data.append({
+                "Column": col,
+                "Type": stats.get("type"),
+                "Unique": stats.get("unique"),
+                "Min": stats.get("min"),
+                "Max": stats.get("max")
+            })
+        st.table(stats_data)
 
     tmp_json = tempfile.NamedTemporaryFile(delete=False, suffix=".json")
     write_json(profile, tmp_json.name)
