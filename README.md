@@ -38,5 +38,5 @@ You can run CSV Profiler directly from GitHub using `uvx` without cloning the re
 
 ```bash
 uvx git+https://github.com/justRuba/CSV-profiler web
-uvx git+https://github.com/justRuba/CSV-profiler profile data/sample.csv --out-dir outputs --format both
-Wrote report to outputs  
+ uvx git+https://github.com/justRuba/CSV-profiler profile data/sample.csv --out-dir outputs --format both
+
