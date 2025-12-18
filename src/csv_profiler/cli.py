@@ -48,7 +48,7 @@ def profile(
 @app.command()
 def web():
     """Launch the Streamlit web interface"""
-    app_path = Path(__file__).parent / "app.py"  # now inside package
+    app_path = Path(__file__).parent / "app.py" 
     typer.echo("Starting Streamlit app...")
     subprocess.run([sys.executable, "-m", "streamlit", "run", str(app_path)])
 
