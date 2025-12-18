@@ -48,18 +48,10 @@ def profile(
 @app.command()
 def web():
     """Launch the Streamlit web interface"""
-    repo_root = Path(__file__).parents[2]  # CLI is in src/csv_profiler/cli.py
-    app_path = repo_root / "app.py"
-
-    if not app_path.exists():
-        typer.echo(
-            "Error: app.py not found. If using uvx, run:\n"
-            "uvx run git+https://github.com/justRuba/CSV-profiler app.py"
-        )
-        raise typer.Exit(1)
-
+    app_path = Path(__file__).parent / "app.py"  # now inside package
     typer.echo("Starting Streamlit app...")
     subprocess.run([sys.executable, "-m", "streamlit", "run", str(app_path)])
+
 
 if __name__ == "__main__":
     app()
