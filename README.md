@@ -13,4 +13,5 @@ A simple Python project that creates summary reports for CSV files, including ba
 
 ### Prerequisites
 - Python 3.10 or higher
-- uv installed
+- UV installed
+
