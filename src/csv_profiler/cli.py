@@ -9,25 +9,30 @@ from csv_profiler.render import write_json, write_markdown, print_summary
 
 app = typer.Typer(help="CSV Profiler CLI")
 
-def run_profile(path: Path, output: Path = Path("outputs")):
+def run_profile(path: Path, output: Path = Path("outputs"), fmt: str = "all"):
     if not path.exists():
         typer.echo(f"Error: File {path} does not exist")
         raise typer.Exit(1)
     rows = read_csv_rows(path)
     report = basic_profile(rows)
     output.mkdir(exist_ok=True)
-    write_json(report, output / "report.json")
-    write_markdown(report, output / "report.md")
-    typer.echo(f"Wrote {output / 'report.json'} and {output / 'report.md'}")
+
+    if fmt in ("json", "all"):
+        write_json(report, output / "report.json")
+    if fmt in ("md", "all"):
+        write_markdown(report, output / "report.md")
+
+    typer.echo(f"Wrote report to {output}")
     print_summary(report)
 
 @app.command()
 def profile(
     path: Path = typer.Argument(..., help="Path to CSV file"),
     output: Path = typer.Option(Path("outputs"), "--out-dir", "-o", help="Output folder"),
+    fmt: str = typer.Option("all", "--format", "-f", help="Output format: json, md, or all")
 ):
     """Profile a CSV file"""
-    run_profile(path, output)
+    run_profile(path, output, fmt)
 
 @app.command()
 def web():
