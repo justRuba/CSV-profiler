@@ -10,7 +10,7 @@ venv/
 outputs/
 
 # Environment variables (secrets)
-.env
+.venv
 
 # OS files
 .DS_Store
